@@ -12,6 +12,7 @@ Billing::Billing(QList<ItemContainer *> items,QWidget *parent) :
 
     setSoftKeys();
 
+    //save all items internally
     m_items=items;
 
 
@@ -22,7 +23,7 @@ Billing::Billing(QList<ItemContainer *> items,QWidget *parent) :
         //check if usr wanted it and its Times not equl to 0
         if(items[i]->isWanted()&&items[i]->Times!="0")
         {
-            //            order.append(items[i]->m_order);
+            //put ordered items in ordered_items list
             ordered_items<<items[i];
         }
 
@@ -31,11 +32,6 @@ Billing::Billing(QList<ItemContainer *> items,QWidget *parent) :
 
     //layout ordered items and calc thier total cost
     displayAndCalcOrderedItems(ordered_items);
-
-
-
-
-
 
 }
 
@@ -52,6 +48,8 @@ void Billing::on_back_button_clicked()
     this->close();
 }
 
+
+//layout and display and calc ordered items
 void Billing::displayAndCalcOrderedItems(QList<ItemContainer *> ordered_items)
 {
     total_cost=0;
@@ -113,6 +111,7 @@ void Billing::doIt()
 
 }
 
+//refresh Billing list
 void Billing::mousePressEvent(QMouseEvent * event)
 {
     //check ordered items

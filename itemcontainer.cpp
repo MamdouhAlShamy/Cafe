@@ -3,7 +3,7 @@
 #include"QDebug"
 #include"detaileditemview.h"
 
-ItemContainer::ItemContainer(/*QString order,*/QWidget *parent) :
+ItemContainer::ItemContainer(QWidget *parent) :
         QWidget(parent),
         ui(new Ui::ItemContainer)
 {
@@ -16,14 +16,15 @@ ItemContainer::ItemContainer(/*QString order,*/QWidget *parent) :
     //prepare
     no_of_same_item=1;
     wanted=0;
-//    m_order=order;
 }
 
 ItemContainer::~ItemContainer()
 {
     delete ui;
 }
-
+///////////////////////////////////
+/////////GET//////////////////////
+//////////////////////////////////
 QString ItemContainer::getId()
 {
     return Id ;}
@@ -53,7 +54,7 @@ QString ItemContainer::getNut()
 }
 
 ///////////////////////////////////
-/////////SET//////////////////////
+/////////SET in Widget or internal//////////////////////
 //////////////////////////////////
 void ItemContainer::setId(QString id)
 {
@@ -78,10 +79,8 @@ void ItemContainer::setThumnialImage(QString thumnail_image)
     Thumnail_image=thumnail_image;
     ui->thumnail_image->setPixmap(QPixmap(thumnail_image));
 }
-void ItemContainer::setLargeImage(QString large_image)
-{
+void ItemContainer::setLargeImage(QString large_image){
     Large_image=large_image;
-
 }
 void ItemContainer::setNut(QString nut)
 {
@@ -92,6 +91,7 @@ void ItemContainer::setNut(QString nut)
 void ItemContainer::on_add_clicked()
 {
 
+    //to show or hide remove"-" button
     if(no_of_same_item==1) //if first time
     {
         ui->remove->setVisible(1);
@@ -103,10 +103,12 @@ void ItemContainer::on_add_clicked()
 
     no_of_same_item++;
 
-    //
-    writeOrder();
+
+    wanted=1;
 
 }
+
+
 //WHEN usr dont wants the item or multi of it
 void ItemContainer::on_remove_clicked()
 {
@@ -114,29 +116,16 @@ void ItemContainer::on_remove_clicked()
     Times=ui->times->text();
     no_of_same_item--;
 
+    //to show or hide add"+" button
     if(no_of_same_item==1)//if usr dont need this item
     {
         ui->remove->setVisible(0);
         ui->times->setVisible(0);
     }
 
-    //
-    writeOrder();
+
 }
 
-//using Flying QString Order to know Billing
-void ItemContainer::writeOrder()
-{
-    //notify that it is wanted
-    wanted=1;
-
-    m_order="";
-    m_order.append(Id);
-    m_order.append(",");
-    m_order.append(ui->times->text());
-    m_order.append(";");
-    qDebug()<<m_order;
-}
 
 //Does usr wantes it ?
 bool ItemContainer::isWanted()
@@ -147,7 +136,7 @@ bool ItemContainer::isWanted()
         return 0;
 }
 
-//when usr press on the Item
+//when usr need more info on the Item
 void ItemContainer::mouseDoubleClickEvent(QMouseEvent *event)
 {
 
@@ -162,3 +151,22 @@ void ItemContainer::mouseDoubleClickEvent(QMouseEvent *event)
 
 
 }
+
+/*
+//    writeOrder();
+}
+
+//using Flying QString Order to know Billing
+//void ItemContainer::writeOrder()
+//{
+//    //notify that it is wanted
+//    wanted=1;
+
+//    m_order="";
+//    m_order.append(Id);
+//    m_order.append(",");
+//    m_order.append(ui->times->text());
+//    m_order.append(";");
+//    qDebug()<<m_order;
+//}
+*/

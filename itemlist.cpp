@@ -8,10 +8,11 @@ itemList::itemList(QList<ItemContainer *> items,QWidget *parent) :
         ui(new Ui::itemList)
 {
     ui->setupUi(this);
+    //billing ICON
     ui->order->setIcon(QIcon("./images/File_64.png"));
 
 
-
+    //take item list and put it in itemsLayout
     for(int i=0;i<items.length();i++)
     {
         ui->itemsLayout->addWidget(items[i]);
@@ -31,8 +32,8 @@ itemList::itemList(QList<ItemContainer *> items,QWidget *parent) :
     //    animation->start();
 
     //kinetice Scrolling
-    FlickCharm FlickCharm;
-    FlickCharm.activateOn(ui->scrollArea);
+//    FlickCharm FlickCharm;
+//    FlickCharm.activateOn(ui->scrollArea);
 }
 
 itemList::~itemList()
@@ -40,6 +41,7 @@ itemList::~itemList()
     delete ui;
 }
 
+//when usr press on order button
 void itemList::on_order_clicked()
 {
     Billing *bill=new Billing(m_items);

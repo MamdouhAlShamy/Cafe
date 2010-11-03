@@ -1,3 +1,16 @@
+/*
+ this class is made to represent each item with
+ id
+ Name
+ Info
+ Price
+ Thumnail image
+ large image
+ Nutrition table
+ number of times order
+
+*/
+
 #ifndef ITEMCONTAINER_H
 #define ITEMCONTAINER_H
 
@@ -12,9 +25,11 @@ class ItemContainer : public QWidget
     Q_OBJECT
 
 public:
-    explicit ItemContainer(/*QString,*/QWidget *parent = 0);
+    explicit ItemContainer(QWidget *parent = 0);
     ~ItemContainer();
     int no_of_same_item;
+
+    //container for data of item
     QString Id;
     QString Name;
     QString Info;
@@ -22,11 +37,11 @@ public:
     QString Thumnail_image;
     QString Large_image;
     QString Nut;
-    QString m_order;
     QString Times;
     bool wanted;
 
     //FUNCTIONS
+    //get
     QString getId();
     QString getName();
     QString getInfo();
@@ -35,8 +50,8 @@ public:
     QString getLargeImage();
     QString getNut();
     QString getTimes();
-    void mouseDoubleClickEvent(QMouseEvent *);
 
+    //set
     void setId(QString);
     void setName(QString);
     void setInfo(QString);
@@ -46,7 +61,9 @@ public:
     void setNut(QString);
     bool isWanted();
 
-    void writeOrder();
+    //what happen when usr Double Click on item
+    void mouseDoubleClickEvent(QMouseEvent *);
+
 
 private:
     Ui::ItemContainer *ui;
