@@ -9,6 +9,7 @@ Billing::Billing(QList<ItemContainer *> items,QWidget *parent) :
         ui(new Ui::Billing)
 {
     ui->setupUi(this);
+    clear_pressed=0;
 
     setSoftKeys();
 
@@ -21,7 +22,7 @@ Billing::Billing(QList<ItemContainer *> items,QWidget *parent) :
     for(int i=0;i<items.length();i++)
     {
         //check if usr wanted it and its Times not equl to 0
-        if(items[i]->isWanted()&&items[i]->Times!="0")
+        if(items[i]->isWanted()&&items[i]->Times!=0)
         {
             //put ordered items in ordered_items list
             ordered_items<<items[i];
@@ -43,6 +44,13 @@ Billing::~Billing()
 //return items back to itemList
 void Billing::on_back_button_clicked()
 {
+    //if clear is pressed
+    if(clear_pressed)
+    {
+        for(int i=0;i<m_items.length();i++)
+            m_items[i]->show();
+    }
+
     itemList *nm=new itemList(m_items);
     nm->show();
     this->close();
@@ -64,11 +72,11 @@ void Billing::displayAndCalcOrderedItems(QList<ItemContainer *> ordered_items)
         //getting price and times of order
         total_cost=total_cost
                    +
-                   (ordered_items[i]->getTimes().toFloat(0)
+                   (ordered_items[i]->getTimes()
                     *
                     ordered_items[i]->getPrice().toFloat(0));
 
-        qDebug()<<"[Billing]Times"<<ordered_items[i]->getTimes().toFloat(0)<<
+        qDebug()<<"[Billing]Times"<<ordered_items[i]->getTimes()<<
                 "Item Price"<<ordered_items[i]->getPrice().toFloat(0)<<
                 "Total"<<QString::number(total_cost);
     }
@@ -119,3 +127,20 @@ void Billing::mousePressEvent(QMouseEvent * event)
 
 
 }
+
+//Clearing the list
+void Billing::on_clear_button_clicked()
+{
+    clear_pressed=1;
+    //clear ordered items
+    for(int i=0;i<m_items.length();i++)
+    {
+        m_items[i]->setTimes(0);
+        m_items[i]->wanted=0;
+        m_items[i]->hide();
+        m_items[i]->refresh();
+    }
+    //clear Cost in UI
+    ui->cost->setText("0");
+}
+

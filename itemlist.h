@@ -9,7 +9,7 @@ this class is made to display all items in a list view
 #include"QDialog"
 #include"itemcontainer.h"
 #include"QList"
-#include"flickcharm.h"
+
 
 namespace Ui {
     class itemList;

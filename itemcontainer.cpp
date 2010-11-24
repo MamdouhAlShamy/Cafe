@@ -14,8 +14,11 @@ ItemContainer::ItemContainer(QWidget *parent) :
     ui->times->setVisible(0);
 
     //prepare
-    no_of_same_item=1;
+//    no_of_same_item=1;
+    Times=0;
     wanted=0;
+
+
 }
 
 ItemContainer::~ItemContainer()
@@ -40,7 +43,7 @@ QString ItemContainer::getPrice()
 QString ItemContainer::getThumnailImage()
 {
     return Thumnail_image;}
-QString ItemContainer::getTimes()
+int ItemContainer::getTimes()
 {
     return Times;
 }
@@ -87,21 +90,29 @@ void ItemContainer::setNut(QString nut)
     Nut=nut;
 }
 
+void ItemContainer::setTimes(int times)
+{
+    Times=times;
+}
+
 //WHEN usr wants the item
 void ItemContainer::on_add_clicked()
 {
 
     //to show or hide remove"-" button
-    if(no_of_same_item==1) //if first time
+    if(Times==0) //if first time
     {
         ui->remove->setVisible(1);
         ui->times->setVisible(1);
     }
 
-    ui->times->setText(QString::number(no_of_same_item));
-    Times=ui->times->text();
+    //increment Times
+    Times++;
 
-    no_of_same_item++;
+    ui->times->setText(QString::number(Times));
+//    Times=ui->times->text();
+
+//    no_of_same_item++;
 
 
     wanted=1;
@@ -112,12 +123,16 @@ void ItemContainer::on_add_clicked()
 //WHEN usr dont wants the item or multi of it
 void ItemContainer::on_remove_clicked()
 {
-    ui->times->setText(QString::number(no_of_same_item-2));
-    Times=ui->times->text();
-    no_of_same_item--;
+    Times--;
+
+    ui->times->setText(QString::number(Times));
+//    Times=ui->times->text();
+//    no_of_same_item--;
+
 
     //to show or hide add"+" button
-    if(no_of_same_item==1)//if usr dont need this item
+
+    if(Times==0)//if usr dont need this item
     {
         ui->remove->setVisible(0);
         ui->times->setVisible(0);
@@ -170,3 +185,15 @@ void ItemContainer::mouseDoubleClickEvent(QMouseEvent *event)
 //    qDebug()<<m_order;
 //}
 */
+
+
+
+//used with Clear Button to hide removeButton and times to Zero
+void ItemContainer::refresh()
+{
+    if(Times==0) //if first time
+    {
+        ui->remove->setVisible(0);
+        ui->times->setVisible(0);
+    }
+}

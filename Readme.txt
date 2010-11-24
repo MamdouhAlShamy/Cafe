@@ -8,7 +8,9 @@ it is version alpha.31OCT.3pm
 6- check isWanted() to know order items from not ordered
 7- display total price
 8- items Draw everything in itemList and billing
+9-
 
+10-Kinetics Scrolling
 
 Bugs:
 DONE<<1- items r removed from itemlist Widget when billing widget appears

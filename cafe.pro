@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql network
 
 TARGET = cafe
 TEMPLATE = app
@@ -16,7 +16,8 @@ SOURCES += main.cpp\
     itemcontainer.cpp \
     billing.cpp \
     detaileditemview.cpp \
-    flickcharm.cpp
+    clientwidget.cpp \
+    QsKineticScroller.cpp
 
 HEADERS  += \
     welcomedialog.h \
@@ -24,12 +25,9 @@ HEADERS  += \
     itemcontainer.h \
     billing.h \
     detaileditemview.h \
-    flickcharm.h
+    clientwidget.h \
+    QsKineticScroller.h
 
-
- myFiles.sources = ./DB.db \
-                    ./images
- DEPLOYMENT += myFiles
 
 
 CONFIG += mobility

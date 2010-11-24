@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     //logfile
-    logfile.open("./logfile.txt", ios::app);
-    qInstallMsgHandler(SimpleLoggingHandler);
+//    logfile.open("./logfile.txt", ios::app);
+//    qInstallMsgHandler(SimpleLoggingHandler);
 
 
 

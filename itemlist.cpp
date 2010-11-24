@@ -2,12 +2,17 @@
 #include "ui_itemlist.h"
 #include "billing.h"
 //#include"QPropertyAnimation"
+#include"QsKineticScroller.h"
 
 itemList::itemList(QList<ItemContainer *> items,QWidget *parent) :
         QDialog(parent),
         ui(new Ui::itemList)
 {
     ui->setupUi(this);
+    //Kinetic Scrolling
+    QsKineticScroller *kinetic_scrolling=new QsKineticScroller(this);
+    kinetic_scrolling->enableKineticScrollFor(ui->scrollArea);
+
     //billing ICON
     ui->order->setIcon(QIcon("./images/File_64.png"));
 
@@ -16,6 +21,7 @@ itemList::itemList(QList<ItemContainer *> items,QWidget *parent) :
     for(int i=0;i<items.length();i++)
     {
         ui->itemsLayout->addWidget(items[i]);
+
     }
 
     //passing items to order button
@@ -31,10 +37,8 @@ itemList::itemList(QList<ItemContainer *> items,QWidget *parent) :
 
     //    animation->start();
 
-    //kinetice Scrolling
-//    FlickCharm FlickCharm;
-//    FlickCharm.activateOn(ui->scrollArea);
-}
+
+    }
 
 itemList::~itemList()
 {

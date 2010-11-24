@@ -37,7 +37,7 @@ public:
     QString Thumnail_image;
     QString Large_image;
     QString Nut;
-    QString Times;
+    int Times;
     bool wanted;
 
     //FUNCTIONS
@@ -49,7 +49,7 @@ public:
     QString getThumnailImage();
     QString getLargeImage();
     QString getNut();
-    QString getTimes();
+    int getTimes();
 
     //set
     void setId(QString);
@@ -59,10 +59,13 @@ public:
     void setThumnialImage(QString);
     void setLargeImage(QString);
     void setNut(QString);
+    void setTimes(int);
     bool isWanted();
+    void refresh();
 
     //what happen when usr Double Click on item
     void mouseDoubleClickEvent(QMouseEvent *);
+
 
 
 private:

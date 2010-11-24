@@ -4,15 +4,22 @@
 #include"QSqlQuery"
 #include"itemlist.h"
 #include"QSysInfo"
+#include"clientwidget.h"
 
 welcomeDialog::welcomeDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::welcomeDialog)
+        QDialog(parent),
+        ui(new Ui::welcomeDialog)
 {
     ui->setupUi(this);
 
     //knowing version of OS
-//    getOSVersion();
+    //    getOSVersion();
+
+    //    //connect to Server
+    clientWidget *nj=new clientWidget;
+    nj->on_connectButton_clicked();
+
+    qDebug()<<"connecting..";
 
     //connect to DB and reterive all data
     bool DB= connect2DB();
@@ -50,7 +57,11 @@ bool welcomeDialog::connect2DB()
     //set database driver to QSQLITE
     *database = QSqlDatabase::addDatabase("QSQLITE");
 
-    database->setDatabaseName("./DB.db");
+
+        database->setDatabaseName("./DB.db"); //windows version
+
+//        database->setDatabaseName("C:\DB.db"); //Symbian
+
 
     //can be removed
     database->setHostName("localhost");
@@ -122,22 +133,22 @@ void welcomeDialog::terminateTalking2DB()
 void welcomeDialog::getOSVersion()
 {
 
-//    //get OS version
-//    switch(QSysInfo::)
-//    {
-//    case QSysInfo::WV_WINDOWS7:
-//        qDebug()<<"The program is working on Windows 7";
-//        break;
+    //    //get OS version
+    //    switch(QSysInfo::)
+    //    {
+    //    case QSysInfo::WV_WINDOWS7:
+    //        qDebug()<<"The program is working on Windows 7";
+    //        break;
 
-//    case QSysInfo::WV_XP:
-//        qDebug()<<"The program is working on Windows XP";
-//        break;
+    //    case QSysInfo::WV_XP:
+    //        qDebug()<<"The program is working on Windows XP";
+    //        break;
 
-//    default:
-//        qDebug()<<"The program is working on MAY be LINUX";
-//        break;
+    //    default:
+    //        qDebug()<<"The program is working on MAY be LINUX";
+    //        break;
 
-//    }
+    //    }
 
 }
 

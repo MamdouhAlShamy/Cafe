@@ -27,6 +27,7 @@ public:
     QMenu* m_menu;
 
     float total_cost;
+    bool clear_pressed;
 
     //save items internally
     QList<ItemContainer *>m_items;
@@ -49,6 +50,7 @@ private:
 
 private slots:
     //go back to Item List
+    void on_clear_button_clicked();
     void on_back_button_clicked();
     //none
     void doIt();
